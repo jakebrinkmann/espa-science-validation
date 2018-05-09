@@ -49,9 +49,9 @@ setup(
 
     python_requires=">=3.5",
 
-    author="Daniel Zelenak, modified from code written by Steve Foga",
+    author="USGS EROS LSRD https://eros.usgs.gov/",
 
-    author_email="daniel.zelenak.ctr@usgs.gov",
+    author_email="custserv@usgs.gov",
 
     long_description=__doc__,
 
@@ -60,5 +60,5 @@ setup(
 
     license="Public Domain",
 
-    url="https://github.com/danzelenak-usgs/Science_Validation"
+    url="https://github.com/USGS-EROS/espa-science-validation"
 )
