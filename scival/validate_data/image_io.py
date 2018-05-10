@@ -2,9 +2,9 @@
 
 Purpose: contains functions to read image data and extract metadata.
 """
-import numpy as np
 import logging
 
+import numpy as np
 try:
     from osgeo import gdal
 except ImportError:

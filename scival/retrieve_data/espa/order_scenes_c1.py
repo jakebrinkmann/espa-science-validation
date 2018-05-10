@@ -4,12 +4,11 @@
 
 import os
 import sys
-import requests
 import json
 
-from espa_validation.retrieve_data import order_specs
-from espa_validation.retrieve_data import api_config
-from espa_validation.retrieve_data import espa_orders_api
+import requests
+
+from scival.retrieve_data.espa import order_specs, api_config, espa_orders_api
 
 
 def order_text(outdir: str) -> str:

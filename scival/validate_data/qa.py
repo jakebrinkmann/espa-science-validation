@@ -38,11 +38,12 @@ daniel.zelenak.ctr@usgs.gov
 
 import sys
 import os
-from espa_validation.validate_data.file_io import Extract, Find, Cleanup
-from espa_validation.validate_data.qa_images import GeoImage
-from espa_validation.validate_data.qa_metadata import MetadataQA
 import logging
 import time
+
+from scival.validate_data.file_io import Extract, Find, Cleanup
+from scival.validate_data.qa_images import GeoImage
+from scival.validate_data.qa_metadata import MetadataQA
 
 
 # TODO (med): Enable SDS sorting with NetCDF, HDF files.
@@ -51,7 +52,7 @@ import time
 # TODO (low): Only CleanUp files that pass all matching tests, leave files with differences to allow further testing.
 
 def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xml_schema: str = None,
-            verbose: bool = False, incl_nd: bool = False) -> None:
+            incl_nd: bool = False) -> None:
     """
     Function to check files and call appropriate QA module(s)
     :param dir_mast: Full path to the master directory
@@ -59,7 +60,6 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
     :param dir_out: Full path to the QA output directory
     :param archive: If True, will clean up existing files and extract from archives
     :param xml_schema: Full path to XML files, default is None
-    :param verbose: If True, enable verbose logging
     :param incl_nd: If True, include NoData in comparisons
     :return:
     """
@@ -69,21 +69,6 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
     # create output dir if it doesn't exist
     if not os.path.exists(dir_out):
         os.makedirs(dir_out)
-
-    # initiate logger
-    if verbose:
-        log_out = dir_out + os.sep + "log_" + time.strftime("%Y%m%d-%I%M%S") + "_verbose.log"
-
-        logging.basicConfig(filename=log_out,
-                            level=logging.DEBUG,
-                            format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
-
-    else:
-        log_out = dir_out + os.sep + "log_" + time.strftime("%Y%m%d-%I%M%S") + ".log"
-
-        logging.basicConfig(filename=log_out,
-                            level=logging.WARNING,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
 
     if archive:
         # do initial cleanup of input directories
