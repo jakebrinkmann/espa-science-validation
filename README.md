@@ -1,5 +1,5 @@
 # espa-science-validation
-Various tools for performing QA on and validating ESPA products
+Compare the outputs from different ESPA environments
 
 ### Support Information
 This project is unsupported software provided by the U.S. Geological Survey (USGS) Earth Resources Observation and Science (EROS) Land Satellite Data Systems (LSDS) Project.  For questions regarding products produced by this source code, please contact us at custserv@usgs.gov.
@@ -9,33 +9,36 @@ This software is preliminary or provisional and is subject to revision. It is be
 
 ### Requirements
 
-python >= 3.5
-
-gdal
-
-numpy
-
-matplotlib
-
-pandas
-
-pyyaml
-
-lxml
-
-requests
-
-scikit_image
+* python >= 3.5
+    * numpy
+    * matplotlib
+    * lxml
+    * requests
+    * scikit_image
+* gdal >= 1.11
 
 ### Installation
 
-``$python setup.py install``
+* Recommended to use conda: `conda create -n scival python=3 GDAL; activate scival`
+* Install python dependencies: `pip install -e .`
 
 ### Running
 
-````$espa_order  -u <user-name> -env <env> -o <out-directory> ````
+These tools allow for the independent validation of higher level science products generated from Level-1 Landsat
+data that are served via the EROS Science Processing Architecture (ESPA).
 
-````$espa_download -u <user-name> -env <env> -o <out-directory> -i <txt-in>````
+As algorithms are continually developed, it is necessary to perform these validations prior to public release.  This
+allows for the identification of unwanted artifacts and the confirmation of desired changes.
+The ordering interface via an API is also tested to ensure consistent and expected performance for public use.
 
-``$espa_qa -m <master-directory> -t <test-directory> -o <results-directory>``
+A pre-designed order is provided in order_specs.py.  Additional orders can be added to the dict, and their
+corresponding keyword can be passed to espa_order.  If no keyword is given, then the original full test order will be
+issued.
 
+Example usage and logical order:
+
+1) `espa_order -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original`
+
+2) `espa_download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <ESPA_ENVIRONMENT>/ -i order_123456789.txt`
+
+3) `espa_qa -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
