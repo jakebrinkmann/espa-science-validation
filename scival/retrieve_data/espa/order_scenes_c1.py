@@ -8,9 +8,7 @@ import json
 
 import requests
 
-import order_specs
-import api_config
-import espa_orders_api
+from scival.retrieve_data.espa import order_specs, api_config, espa_orders_api
 
 
 def order_text(outdir: str) -> str:

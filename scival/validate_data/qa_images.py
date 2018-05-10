@@ -5,10 +5,9 @@ import logging
 
 import numpy as np
 
-from image_io import RasterIO, RasterCmp
-from file_io import Cleanup, Find
-import stats
-from file_io import ImWrite
+from scival.validate_data.image_io import RasterIO, RasterCmp
+from scival.validate_data.file_io import Cleanup, Find, ImWrite
+from scival.validate_data import stats
 
 
 def do_diff(test, mast, nodata=None):

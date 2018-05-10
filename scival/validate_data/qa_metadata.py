@@ -5,8 +5,8 @@ import logging
 
 from lxml import etree
 
-from file_io import Cleanup, ImWrite
-from qa_images import ArrayImage
+from scival.validate_data.file_io import Cleanup, ImWrite
+from scival.validate_data.qa_images import ArrayImage
 
 
 class MetadataQA:

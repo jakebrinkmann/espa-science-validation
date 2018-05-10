@@ -14,7 +14,7 @@ from pprint import pprint
 
 import requests
 
-import api_config
+from scival.retrieve_data.espa import api_config
 
 
 def get_time() -> datetime.datetime:

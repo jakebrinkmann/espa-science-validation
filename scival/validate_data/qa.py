@@ -41,9 +41,9 @@ import os
 import logging
 import time
 
-from file_io import Extract, Find, Cleanup
-from qa_images import GeoImage
-from qa_metadata import MetadataQA
+from scival.validate_data.file_io import Extract, Find, Cleanup
+from scival.validate_data.qa_images import GeoImage
+from scival.validate_data.qa_metadata import MetadataQA
 
 
 # TODO (med): Enable SDS sorting with NetCDF, HDF files.
