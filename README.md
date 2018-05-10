@@ -15,12 +15,23 @@ This software is preliminary or provisional and is subject to revision. It is be
     * lxml
     * requests
     * scikit_image
-* gdal >= 1.11
+* GDAL >= 1.11
 
 ### Installation
 
-* Recommended to use conda: `conda create -n scival python=3 GDAL; activate scival`
+* Recommended to using conda: `conda create -n scival python=3 GDAL; source activate scival`
 * Install python dependencies: `pip install -e .`
+
+
+### Configuration
+
+Some arguments can be configured from the environment:
+
+arg | summary
+-|-
+`ESPA_SCIVAL_ESPA_USERNAME` | A valid [ERS][1] account
+`ESPA_SCIVAL_ESPA_ENV` | Select a different ESPA host
+
 
 ### Running
 
@@ -37,8 +48,8 @@ issued.
 
 Example usage and logical order:
 
-1) `espa_order -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original`
+1) `scival espa order -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original`
 
-2) `espa_download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <ESPA_ENVIRONMENT>/ -i order_123456789.txt`
+2) `scival espa download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <ESPA_ENVIRONMENT>/ -i order_123456789.txt`
 
-3) `espa_qa -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
+3) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
