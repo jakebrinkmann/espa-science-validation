@@ -1,7 +1,8 @@
 """An entry point for the qa module"""
 
 import argparse
-from espa_validation.validate_data.qa import qa_data
+
+from validate_data.qa import qa_data
 
 
 def main():

@@ -1,7 +1,8 @@
 """Entry point to the retrieve_data.espa_orders_api.py script"""
 
 import argparse
-from espa_validation.retrieve_data import espa_orders_api
+
+from retrieve_data.espa import espa_orders_api
 
 
 def main():

@@ -6,13 +6,15 @@ then by order note."""
 
 import os
 import ast
-import requests
 import getpass
 import time
 import datetime
 from typing import Union
 from pprint import pprint
-from espa_validation.retrieve_data import api_config
+
+import requests
+
+import api_config
 
 
 def get_time() -> datetime.datetime:

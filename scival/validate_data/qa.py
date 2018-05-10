@@ -38,11 +38,12 @@ daniel.zelenak.ctr@usgs.gov
 
 import sys
 import os
-from espa_validation.validate_data.file_io import Extract, Find, Cleanup
-from espa_validation.validate_data.qa_images import GeoImage
-from espa_validation.validate_data.qa_metadata import MetadataQA
 import logging
 import time
+
+from file_io import Extract, Find, Cleanup
+from qa_images import GeoImage
+from qa_metadata import MetadataQA
 
 
 # TODO (med): Enable SDS sorting with NetCDF, HDF files.

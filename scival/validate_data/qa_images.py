@@ -2,11 +2,13 @@
 
 import os
 import logging
+
 import numpy as np
-from espa_validation.validate_data.image_io import RasterIO, RasterCmp
-from espa_validation.validate_data.file_io import Cleanup, Find
-from espa_validation.validate_data import stats
-from espa_validation.validate_data.file_io import ImWrite
+
+from image_io import RasterIO, RasterCmp
+from file_io import Cleanup, Find
+import stats
+from file_io import ImWrite
 
 
 def do_diff(test, mast, nodata=None):

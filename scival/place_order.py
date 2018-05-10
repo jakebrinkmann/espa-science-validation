@@ -1,7 +1,7 @@
 """Entry point to the retrieve_data.order_scenes_c1.py script"""
 
 import argparse
-from espa_validation.retrieve_data.order_scenes_c1 import place_order
+from retrieve_data.espa.order_scenes_c1 import place_order
 
 
 def main():

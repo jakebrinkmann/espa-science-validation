@@ -2,9 +2,11 @@
 
 import os
 import logging
+
 from lxml import etree
-from espa_validation.validate_data.file_io import Cleanup, ImWrite
-from espa_validation.validate_data.qa_images import ArrayImage
+
+from file_io import Cleanup, ImWrite
+from qa_images import ArrayImage
 
 
 class MetadataQA:
