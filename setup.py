@@ -31,7 +31,8 @@ setup(name='espa-science-validation',
           "gdal",
           "requests",
           "lxml",
-          "scikit_image"
+          "scikit_image",
+          "click",
       ],
       # List additional groups of dependencies here (e.g. development
       # dependencies). You can install these using the following syntax,
@@ -56,9 +57,7 @@ setup(name='espa-science-validation',
           ],
       },
       entry_points={"console_scripts": [
-          "espa_download = scival.download:main",
-          "espa_order = scival.place_order:main",
-          "espa_qa = scival.validate:main"
+          "scival = scival.cli:cli",
       ]},
       include_package_data=True,
       zip_safe=False
