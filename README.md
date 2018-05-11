@@ -50,6 +50,9 @@ Example usage and logical order:
 
 1) `scival espa order -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original`
 
-2) `scival espa download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <ESPA_ENVIRONMENT>/ -i order_123456789.txt`
+1) `scival espa download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY>/ -i order_123456789.txt`
 
-3) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
+1) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
+
+
+[1]: https://ers.cr.usgs.gov/
