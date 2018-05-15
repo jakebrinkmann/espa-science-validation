@@ -41,10 +41,9 @@ def espa():
 @click.option('-u', '--username', required=True, type=str, help='ESPA user name', envvar='ESPA_SCIVAL_ESPA_USERNAME')
 @click.option('-e', '--espa_env', required=True, type=click.Choice(espa_orders_api.api_config.espa_env.keys()), help='ESPA environment', envvar='ESPA_SCIVAL_ESPA_ENV')
 @click.option('-o', '--dir_out', required=True, type=str, help='The output directory')
-@click.option('--ssl-verify/--no-ssl-verify', default=False, help='Set SSL Verify Off')
 @click.option('--order', required=False, type=str, help='Specify a keyword to look up the appropriate order from order_specs.py')
-def order(username, espa_env, dir_out, ssl_verify, order):
-    order_scenes_c1.place_order(espa_env, username, ssl_verify, dir_out, order)
+def order(username, espa_env, dir_out, order):
+    order_scenes_c1.place_order(espa_env, username, dir_out, order)
 
 
 @espa.command('download', help='Download already processed data')

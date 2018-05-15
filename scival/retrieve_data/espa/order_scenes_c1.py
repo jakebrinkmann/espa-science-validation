@@ -52,52 +52,48 @@ def load_order(order_key: str='original.test1') -> dict:
         raise
 
 
-def place_order(espa_env: str, username: str, ssl_ver: bool=True, outdir: str=None, order: str=None):
+def place_order(espa_env: str, username: str, outdir: str=None, order_key: str=None):
     """
     Place the order with the appropriate ESPA environment
-    :param order: Optionally specify a keyword pointing to a specific order
+    :param order_key: Optionally specify a keyword pointing to a specific order
     :param outdir: Optionally specify full path to the output directory, otherwise os.getcwd() is used
-    :param ssl_ver: Depends on testing environment, True by default
     :param espa_env: The name of the ESPA environment
     :param username: ESPA username
     :return:
     """
-    passwd = espa_orders_api.espa_login()
 
     espa_url = espa_orders_api.get_espa_env(espa_env)
 
-    orders = load_order(order)
+    orders = load_order(order_key)
+
+    passwd = espa_orders_api.espa_login()
 
     order_length = len(orders)
 
     response = list()
 
-    counter = 0
+    for i, order in enumerate(orders):
 
-    for order in orders:
-        counter += 1
-
-        logger.info("Requesting order {} of {}".format(counter, order_length))
+        logger.info("Requesting order %d of %d", i+1, order_length)
 
         r = requests.post(espa_url + api_config.api_urls["order"],
                           auth=(username, passwd),
-                          json=order,
-                          verify=ssl_ver)
+                          json=order)
 
         try:
-            response.append(r.json())
+            result = r.json()
+            if 'orderid' not in result:
+                logger.error('Order "%s" %d/%d failed: %s', order_key, i+1, order_length, result)
+                continue
+
+            response.append(result)
 
         except json.decoder.JSONDecodeError:  # inherits from ValueError
             # This error seems to occur when trying to decode a None-type object
-            print("\nThere was likely a problem connecting with the host.  "
-                  "Check to see if ESPA is down for maintenance.")
+            logger.error("There was likely a problem connecting with the host.  "
+                         "Check to see if ESPA is down for maintenance.")
 
-    with open(order_text(outdir), "a") as f:
-        if type(response) is dict:
-            f.write(str(response) + "\n")
-
-        else:
-            for resp in response:
-                f.write(str(resp) + "\n")
-
-    return None
+    filename = order_text(outdir)
+    logger.warning('Store ordering results: %s', filename)
+    with open(filename, "a") as f:
+        f.write(json.dumps(response, indent=4))
