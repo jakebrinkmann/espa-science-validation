@@ -10,7 +10,7 @@ from scival.validate_data import stats
 from scival import logger
 
 
-def do_diff(test, mast, nodata=None):
+def do_diff(test, mast, nodata=False):
     """Do image diff, break if the grids are not the same size.
 
     Args:
@@ -18,7 +18,7 @@ def do_diff(test, mast, nodata=None):
         mast <numpy.ndarray>: array of master raster
     """
     # If a NoData value is present, or the "--include-nodata" flag was used:
-    if nodata:
+    if nodata != False:
         test = np.ma.masked_where(test == nodata, test)
         mast = np.ma.masked_where(mast == nodata, mast)
 
@@ -48,7 +48,7 @@ def call_stats(test, mast, rast_arr, fn_out, dir_out, rast_num=0):
         rast_num <int>: individual number of image (default=0)
         nodata <int>: no data value (default=-9999)
     """
-    if type(rast_arr) is np.ndarray or type(rast_arr) is np.ma.core.MaskedArray:
+    if isinstance(rast_arr, (np.ndarray, np.ma.core.MaskedArray)):
 
         if np.any(rast_arr != 0):
             logger.warning("Image difference found!")

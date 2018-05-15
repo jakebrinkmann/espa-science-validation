@@ -85,7 +85,7 @@ class Find:
         if len(out_files) == 0:
             logger.critical("No files found in dir {0}".format(target_dir))
 
-        return out_files
+        return sorted(out_files)
 
     @staticmethod
     def get_ext(*args):
