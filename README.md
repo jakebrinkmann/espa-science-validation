@@ -48,9 +48,9 @@ issued.
 
 Example usage and logical order:
 
-1) `scival espa order -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original`
+1) `scival espa order -u <USERNAME> -e <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY> --order original.test1`
 
-1) `scival espa download -u <USERNAME> -env <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY>/ -i order_123456789.txt`
+1) `scival espa download -u <USERNAME> -e <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY>/ -i order_123456789.txt`
 
 1) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
 
