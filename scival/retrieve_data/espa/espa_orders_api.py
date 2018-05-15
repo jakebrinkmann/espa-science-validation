@@ -9,12 +9,14 @@ import ast
 import getpass
 import time
 import datetime
+import json
 from typing import Union
 from pprint import pprint
 
 import requests
 
 from scival.retrieve_data.espa import api_config
+from scival import logger
 
 
 def get_time() -> datetime.datetime:
@@ -142,7 +144,6 @@ def get_orders(txt_in: str, outdir: str, username: str, espa_env: str):
     passwd = espa_login()
 
     order_list = list()
-    error_list = list()
     failed_list = list()
     failed_msg_list = list()
     misc_list = list()
@@ -150,18 +151,9 @@ def get_orders(txt_in: str, outdir: str, username: str, espa_env: str):
     rerun_list = list()
 
     # Populate a new list with the orders contained in the opened file pointed to by txt_in
-    with open(txt_in, "r") as txt:
-        for line in txt:
-            if "errors" not in line:
-                # Only read in lines that are missing the keyword "errors"
-                order_list.append(ast.literal_eval(line))
-
-            else:
-                # Create a list of all the lines containing the keyword "errors"
-                error_list.append(ast.literal_eval(line))
+    order_list = json.loads(open(txt_in, "r").read())
 
     # pprint(order_list)
-    # pprint(error_list)
 
     t0 = get_time()
 
@@ -255,3 +247,31 @@ def get_orders(txt_in: str, outdir: str, username: str, espa_env: str):
     print("Processing time: {}".format(t1 - t0))
 
     return None
+
+
+def cancel_orders(txt_in: str, username: str, espa_env: str):
+    """
+
+    :param txt_in: The full path and filename of the input txt file containing the ESPA orders
+    :param username: ESPA user name
+    :param espa_env: ESPA environment
+    :return:
+    """
+
+    order_list = json.loads(open(txt_in, "r").read())
+
+    t0 = get_time()
+    espa_url = get_espa_env(espa_env)
+    passwd = espa_login()
+
+    for order in order_list:
+        url = espa_url + api_config.api_urls["order"] + order["orderid"]
+        logger.warning('Cancelling order: %s', url)
+        cancellation = {'orderid': order['orderid'], 'status': 'cancelled'}
+        result = requests.put(url, auth=(username, passwd), json=cancellation).json()
+        logger.info('Result: %s', result)
+
+    logger.warning('Removing cancelled file: %s', txt_in)
+    os.unlink(txt_in)
+
+    logger.info("Processing time: {}".format(get_time() - t0))
