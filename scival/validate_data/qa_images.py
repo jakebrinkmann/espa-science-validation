@@ -1,13 +1,13 @@
 # qa_images.py
 
 import os
-import logging
 
 import numpy as np
 
 from scival.validate_data.image_io import RasterIO, RasterCmp
 from scival.validate_data.file_io import Cleanup, Find, ImWrite
 from scival.validate_data import stats
+from scival import logger
 
 
 def do_diff(test, mast, nodata=None):
@@ -22,7 +22,7 @@ def do_diff(test, mast, nodata=None):
         test = np.ma.masked_where(test == nodata, test)
         mast = np.ma.masked_where(mast == nodata, mast)
 
-        logging.info("Making nodata value {0} from diff calc.".format(nodata))
+        logger.info("Making nodata value {0} from diff calc.".format(nodata))
 
     try:
         # TODO: Figure out why some bands cannot be compared correctly.
@@ -31,7 +31,7 @@ def do_diff(test, mast, nodata=None):
         return diff
 
     except (ValueError, AttributeError, TypeError) as e:
-        logging.warning("Error: {0}".format(e))
+        logger.warning("Error: {0}".format(e))
 
         return False
 
@@ -51,9 +51,9 @@ def call_stats(test, mast, rast_arr, fn_out, dir_out, rast_num=0):
     if type(rast_arr) is np.ndarray or type(rast_arr) is np.ma.core.MaskedArray:
 
         if np.any(rast_arr != 0):
-            logging.warning("Image difference found!")
+            logger.warning("Image difference found!")
 
-            logging.warning("Test: {0} | Master: {1}".format(test, mast))
+            logger.warning("Test: {0} | Master: {1}".format(test, mast))
 
             # find file name (for saving plot)
             fout = fn_out.split(os.sep)[-1]
@@ -75,10 +75,10 @@ def call_stats(test, mast, rast_arr, fn_out, dir_out, rast_num=0):
                               str(rast_num), dir_out)
 
         else:
-            logging.info("Binary data match.")
+            logger.info("Binary data match.")
 
     else:
-        logging.warning("Target raster is not a valid numpy array or numpy "
+        logger.warning("Target raster is not a valid numpy array or numpy "
                         "masked array. Cannot run statistics!")
 
 
@@ -105,7 +105,7 @@ class ArrayImage:
             mast_im = imread(mast)
 
         except ImportError:
-            logging.warning("Likely missing Python Image Library (PIL).")
+            logger.warning("Likely missing Python Image Library (PIL).")
 
             # try Scikit Image
             from skimage.io import imread
@@ -116,7 +116,7 @@ class ArrayImage:
                 test_im = imread(test)
 
             except (ValueError, TypeError, ImportError):
-                logging.warning("Not able to open image with skimag.io. Likely missing image library.")
+                logger.warning("Not able to open image with skimag.io. Likely missing image library.")
 
                 return None
 
@@ -125,17 +125,17 @@ class ArrayImage:
             diff_im = do_diff(test_im, mast_im)
 
             if len(np.nonzero(diff_im)) > 3:
-                logging.error("Values differ between {0} and {1}.".format(test, mast))
+                logger.error("Values differ between {0} and {1}.".format(test, mast))
 
                 return diff_im
 
             else:
-                logging.info("Values equivalent between {0} and {1}.".format(test, mast))
+                logger.info("Values equivalent between {0} and {1}.".format(test, mast))
 
                 return None
 
         except ValueError:
-            logging.error("Image {0} and {1} are not the same dimensions.".format(test, mast))
+            logger.error("Image {0} and {1} are not the same dimensions.".format(test, mast))
 
 
 class GeoImage:
@@ -152,21 +152,21 @@ class GeoImage:
             ext <str>: file extension
             include_nd <bool>: incl. nodata values in file cmp (default=False)
         """
-        print("Checking {0} files...".format(ext))
+        logger.warning("Checking {0} files...".format(ext))
 
         # clean up non-matching files
         test, mast = Cleanup.remove_nonmatching_files(test, mast)
 
         # make sure there are actually files to check
         if mast is None or test is None:
-            logging.error("No {0} files to check in test and/or mast directories.".format(ext))
+            logger.error("No {0} files to check in test and/or mast directories.".format(ext))
 
             return False
 
         # do other comparison checks, return stats + plots if diffs exist
         for i, j in zip(test, mast):
 
-            logging.info("Checking Test {0} against Master {1}".format(i, j))
+            logger.info("Checking Test {0} against Master {1}".format(i, j))
 
             # Open each raster
             ds_test = RasterIO.open_raster(i)
@@ -192,7 +192,7 @@ class GeoImage:
             d_range = Find.count(i, ds_test, j, ds_mast, ext)
 
             if d_range is None:
-                logging.critical("Number of files different; data cannot be tested successfully.")
+                logger.critical("Number of files different; data cannot be tested successfully.")
 
                 continue
 
@@ -201,14 +201,14 @@ class GeoImage:
                 for ii in range(0, d_range):
                     # Get the first band from each raster
                     if ext == ".img":
-                        logging.info("Reading sub-band {0} from .img {1}...".format(ii, i))
+                        logger.info("Reading sub-band {0} from .img {1}...".format(ii, i))
 
                         ds_tband = RasterIO.read_band_as_array(ds_test, ii)
 
                         ds_mband = RasterIO.read_band_as_array(ds_mast, ii)
 
                     else:
-                        logging.info("Reading .hdf/.nc SDS {0} from file {0}...".format(ii, i))
+                        logger.info("Reading .hdf/.nc SDS {0} from file {0}...".format(ii, i))
 
                         sds_tband = RasterIO.open_raster(RasterIO.get_sds(ds_test)[ii][0])
 
@@ -230,7 +230,7 @@ class GeoImage:
                     call_stats(i, j, diff, i, dir_out, rast_num=ii)
 
             else:  # else it's a singleband raster
-                logging.info("Reading {0}...".format(i))
+                logger.info("Reading {0}...".format(i))
 
                 # read in bands as array
                 ds_tband, t_nd = RasterIO.read_band_as_array(ds_test)

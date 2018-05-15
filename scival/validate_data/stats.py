@@ -2,8 +2,10 @@
 
 import os
 import csv
+
 import numpy as np
-import logging
+
+from scival import logger
 
 
 def pct_diff_raster(ds_tband: np.ndarray, ds_mband: np.ndarray, diff_rast: np.ndarray, nodata: int=-9999) -> np.ndarray:
@@ -32,7 +34,7 @@ def pct_diff_raster(ds_tband: np.ndarray, ds_mband: np.ndarray, diff_rast: np.nd
     # make a pct diff raster
     pct_diff_raster = ((np.abs(diff_rast) / np.abs(float(rmax - rmin))) * 100)
 
-    logging.warning("Percent difference raster created.")
+    logger.warning("Percent difference raster created.")
 
     return pct_diff_raster
 
@@ -52,7 +54,7 @@ def img_stats(test: str, mast: str, diff_img: np.ndarray, dir_in: str, fn_in: st
     diff_img = np.ma.masked_where(diff_img == 0, diff_img)
 
     fn_out = dir_out + os.sep + "stats.csv"
-    logging.info("Writing stats for {0} to {1}.".format(fn_in, fn_out))
+    logger.info("Writing stats for {0} to {1}.".format(fn_in, fn_out))
 
     file_exists = os.path.isfile(fn_out)
 

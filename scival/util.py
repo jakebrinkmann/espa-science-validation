@@ -4,8 +4,8 @@ import sys
 import logging
 import datetime
 
+from . import logger
 
-logger = None
 
 def setup_logger(verbosity, stream='stderr'):
     """ configure logging via verbosity level of between 0 and 2 corresponding
@@ -13,7 +13,6 @@ def setup_logger(verbosity, stream='stderr'):
     global logger
 
     log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger()
 
     log_out = "log_{0:%Y%m%d-%H%M%S}.log".format(datetime.datetime.now())
     fh = logging.FileHandler(log_out)
@@ -24,5 +23,6 @@ def setup_logger(verbosity, stream='stderr'):
     log_level = max(logging.DEBUG, logging.WARNING - logging.DEBUG*verbosity)
     ch = logging.StreamHandler(stream=getattr(sys, stream.lower()))
     ch.setFormatter(log_formatter)
-    fh.setLevel(log_level)
+    ch.setLevel(log_level)
     logger.addHandler(ch)
+    logger.setLevel(log_level)

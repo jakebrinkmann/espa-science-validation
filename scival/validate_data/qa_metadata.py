@@ -1,12 +1,12 @@
 """qa_metadata.py"""
 
 import os
-import logging
 
 from lxml import etree
 
 from scival.validate_data.file_io import Cleanup, ImWrite
 from scival.validate_data.qa_images import ArrayImage
+from scival import logger
 
 
 class MetadataQA:
@@ -27,11 +27,11 @@ class MetadataQA:
         result = xmlschema.validate(xmlfile)
 
         if result:
-            logging.warning('XML file {0} is valid with XML schema {1}.'
+            logger.warning('XML file {0} is valid with XML schema {1}.'
                             .format(test, schema))
 
         else:
-            logging.critical('XML file {0} is NOT valid with XML schema {1}.'
+            logger.critical('XML file {0} is NOT valid with XML schema {1}.'
                              .format(test, schema))
 
     @staticmethod
@@ -45,18 +45,18 @@ class MetadataQA:
             mast <str>: path to master text file
             ext <str>: file extension (should be .txt, .xml or .gtf
         """
-        logging.info("Checking {0} files...".format(ext))
+        logger.info("Checking {0} files...".format(ext))
 
         test, mast = Cleanup.remove_nonmatching_files(test, mast)
 
         # Do some checks to make sure files are worth testing
         if mast is None or test is None:
-            logging.warning("No {0} files to check in test and/or mast "
+            logger.warning("No {0} files to check in test and/or mast "
                             "directories.".format(ext))
             return
 
         if len(mast) != len(test):
-            logging.error("{0} file lengths differ. Master: {1} | Test:"
+            logger.error("{0} file lengths differ. Master: {1} | Test:"
                           " {2}".format(ext, len(mast), len(test)))
             return
 
@@ -78,11 +78,11 @@ class MetadataQA:
             i_fn = i.split(os.sep)[-1]
             j_fn = j.split(os.sep)[-1]
             if i_fn != j_fn:
-                logging.error("{0} file names differ. Master: {1} | Test: {2}".
+                logger.error("{0} file names differ. Master: {1} | Test: {2}".
                               format(ext, j, i))
                 return
             else:
-                logging.info("{0} file names equivalent. Master: {1} | Test: "
+                logger.info("{0} file names equivalent. Master: {1} | Test: "
                              "{2}".format(ext, j, i))
 
             # Check open files line-by-line (sorted) for changes.
@@ -90,10 +90,10 @@ class MetadataQA:
             txt_diffs = set(file_topen).difference(set(file_mopen))
             if len(txt_diffs) > 0:
                 for k in txt_diffs:
-                    logging.error("{0} changes: {1}".format(ext, k))
+                    logger.error("{0} changes: {1}".format(ext, k))
 
             else:
-                logging.info("No differences between {0} and {1}.".
+                logger.info("No differences between {0} and {1}.".
                              format(i, j))
 
     @staticmethod
@@ -107,10 +107,10 @@ class MetadataQA:
         :return:
         """
         test, mast = Cleanup.remove_nonmatching_files(test, mast)
-        logging.info("Checking JPEG preview/gverify files...")
+        logger.info("Checking JPEG preview/gverify files...")
 
         if mast is None or test is None:
-            logging.error("No JPEG files to check in test and/or mast "
+            logger.error("No JPEG files to check in test and/or mast "
                           "directories.")
 
         else:
@@ -118,16 +118,16 @@ class MetadataQA:
 
                 # Compare file sizes
                 if os.path.getsize(i) != os.path.getsize(j):
-                    logging.warning("JPEG file sizes do not match for "
+                    logger.warning("JPEG file sizes do not match for "
                                     "Master {0} and Test {1}...\n".
                                     format(j, i))
-                    logging.warning("{0} size: {1}".format(
+                    logger.warning("{0} size: {1}".format(
                         i, os.path.getsize(i)))
-                    logging.warning("{0} size: {1}".format(
+                    logger.warning("{0} size: {1}".format(
                         j, os.path.getsize(j)))
 
                 else:
-                    logging.info("JPEG files {0} and {1} are the same "
+                    logger.info("JPEG files {0} and {1} are the same "
                                  "size".format(j, i))
 
                 # diff images
