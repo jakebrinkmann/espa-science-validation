@@ -1,0 +1,35 @@
+[
+    {"etm7_collection": {
+        "inputs": ["LE07_L1TP_039037_20080712_20160922_01_T1"],
+        "products": ["source_metadata"]
+    },
+        "format": "gtiff",
+        "note": "Test5"
+
+    }, {"tm5_collection": {
+        "inputs": ["LT05_L1TP_010054_20110312_20161209_01_T1"],
+        "products": ["swe"]
+    },
+        "format": "gtiff",
+        "note": "Test5"
+
+    }, {"olitirs8_collection": {
+        "inputs": ["LC08_L1TP_047027_20131014_20170308_01_T1"],
+        "products": ["toa"]
+    },
+        "format": "envi",
+        "note": "Test5",
+        "resize": {
+            "pixel_size": 2000,
+            "pixel_size_units": "meters"
+    },
+        "projection": {
+            "utm": {
+                "zone": 11,
+                "zone_ns": "north"
+            }
+    },
+        "resampling_method": "cc"
+
+    }
+]

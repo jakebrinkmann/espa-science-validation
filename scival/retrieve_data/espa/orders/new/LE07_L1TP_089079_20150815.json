@@ -1,0 +1,44 @@
+[
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_089079_20150815_20161022_01_T1"
+            ],
+            "products": [
+                "toa",
+                "sr"
+            ]
+        },
+        "format": "envi",
+        "note": "Test1"
+    },
+
+    // Should fail - all fill
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_089079_20150815_20161022_01_T1"
+            ],
+            "products": [
+                "toa",
+                "sr"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "projection": {
+            "utm": {
+                "zone": 56,
+                "zone_ns": "south"
+            }
+        },
+        "image_extents": {
+            "west": 350000,
+            "north": -3120000,
+            "east": 398000,
+            "south": -3160000,
+            "units": "meters"
+        },
+        "resampling_method": "nn"
+    }
+]

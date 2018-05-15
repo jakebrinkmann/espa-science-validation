@@ -1,0 +1,14 @@
+[
+    {
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_010054_20110312_20161209_01_T1"
+            ],
+            "products": [
+                "swe"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test5"
+    }
+]

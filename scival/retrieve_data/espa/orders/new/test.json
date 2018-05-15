@@ -1,0 +1,15 @@
+[
+    {
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_015035_20140713_20170304_01_T1"
+            ],
+            "products": [
+                "sr",
+                "l1"
+            ]
+        },
+        "format": "gtiff",
+        "note": "test_0"
+    }
+]

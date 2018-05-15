@@ -1,0 +1,24 @@
+[
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1GT_210117_20130302_20161125_01_T2"
+            ],
+            "products": [
+                "l1",
+                "source_metadata",
+                "sr"
+            ]
+        },
+        "format": "envi",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 0.0025,
+            "pixel_size_units": "dd"
+        },
+        "projection": {
+            "lonlat": null
+        },
+        "resampling_method": "nn"
+    }
+]

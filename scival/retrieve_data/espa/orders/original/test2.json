@@ -1,0 +1,299 @@
+[
+    {
+        "tm4_collection": {
+            "inputs": [
+                "LT04_L1TP_030031_19890420_20161002_01_T1"
+            ],
+            "products": [
+                "source_metadata",
+                "toa",
+                "sr",
+                "bt",
+                "sr_ndvi",
+                "sr_ndmi",
+                "sr_nbr",
+                "sr_nbr2",
+                "sr_savi",
+                "sr_msavi",
+                "sr_evi",
+                "st"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "projection": {
+            "utm": {
+                "zone": 14,
+                "zone_ns": "north"
+            }
+        },
+        "image_extents": {
+            "north": 4673018.374,
+            "south": 4569036.916,
+            "east": 59119.194,
+            "west": 51371.027,
+            "units": "meters"
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1GT_210117_20130302_20161125_01_T2"
+            ],
+            "products": [
+                "l1",
+                "source_metadata",
+                "sr"
+            ]
+        },
+        "format": "envi",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 0.0025,
+            "pixel_size_units": "dd"
+        },
+        "projection": {
+            "lonlat": null
+        },
+        "resampling_method": "nn"
+    },
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_039037_20080712_20160922_01_T1"
+            ],
+            "products": [
+                "l1",
+                "bt"
+            ]
+        },
+        "format": "envi",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 500,
+            "pixel_size_units": "meters"
+        },
+        "projection": {
+            "utm": {
+                "zone": 11,
+                "zone_ns": "north"
+            }
+        },
+        "resampling_method": "nn"
+    },
+    {
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_010054_20110312_20161209_01_T1"
+            ],
+            "products": [
+                "l1",
+                "source_metadata",
+                "sr"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 0.0025,
+            "pixel_size_units": "dd"
+        },
+        "projection": {
+            "lonlat": null
+        },
+        "resampling_method": "nn"
+    },
+    {
+        "mod09ga": {
+            "inputs": [
+                "MOD09GA.A2001024.h20v17.005.2006351175917",
+                "MOD09GA.A2001024.h20v17.006.2015140115718"
+            ],
+            "products": [
+                "l1"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 250,
+            "pixel_size_units": "meters"
+        },
+        "image_extents": {
+            "west": -150000,
+            "north": 1100200,
+            "east": 124685.981,
+            "south": 951765.809,
+            "units": "meters"
+        },
+        "projection": {
+            "ps": {
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_true_scale": -80,
+                "longitudinal_pole": 160
+            }
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "myd13q1": {
+            "inputs": [
+                "MYD13Q1.A2002185.h19v05.006.2015149070403"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_182034_20020628_20161207_01_T1"
+            ],
+            "products": [
+                "l1",
+                "swe",
+                "sr_ndvi",
+                "stats"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 250,
+            "pixel_size_units": "meters"
+        },
+        "image_extents": {
+            "west": 1190082.308,
+            "north": 1019317.137,
+            "east": 1335074.265,
+            "south": 907662.747,
+            "units": "meters"
+        },
+        "projection": {
+            "aea": {
+                "central_meridian": 10,
+                "datum": "nad27",
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_of_origin": 30,
+                "standard_parallel_1": 43,
+                "standard_parallel_2": 62
+            }
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_047027_20131014_20170308_01_T1"
+            ],
+            "products": [
+                "source_metadata",
+                "bt",
+                "sr_ndvi",
+                "sr_ndmi",
+                "sr_nbr",
+                "sr_nbr2",
+                "sr_savi",
+                "sr_msavi",
+                "sr_evi"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 0.0025,
+            "pixel_size_units": "dd"
+        },
+        "image_extents": {
+            "west": -124.184902,
+            "north": 48.110315,
+            "east": -122.977087,
+            "south": 47.29654,
+            "units": "dd"
+        },
+        "projection": {
+            "lonlat": null
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_089079_20150815_20161022_01_T1"
+            ],
+            "products": [
+                "toa",
+                "sr"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "projection": {
+            "utm": {
+                "zone": 56,
+                "zone_ns": "south"
+            }
+        },
+        "image_extents": {
+            "west": 350000,
+            "north": -3120000,
+            "east": 398000,
+            "south": -3160000,
+            "units": "meters"
+        },
+        "resampling_method": "nn"
+    },
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_195021_20150907_20161021_01_T1"
+            ],
+            "products": [
+                "toa",
+                "bt",
+                "sr_evi",
+                "swe"
+            ]
+        },
+        "format": "netcdf",
+        "note": "Test2",
+        "projection": {
+            "lonlat": null
+        },
+        "resize": {
+            "pixel_size": 0.004,
+            "pixel_size_units": "dd"
+        },
+        "image_extents": {
+            "west": 12,
+            "north": 56,
+            "east": 13,
+            "south": 55.5,
+            "units": "dd"
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_033032_20161020_20170219_01_T1"
+            ],
+            "products": [
+                "sr",
+                "sr_ndvi",
+                "sr_ndmi",
+                "sr_nbr",
+                "sr_nbr2",
+                "sr_savi",
+                "sr_msavi",
+                "sr_evi",
+                "stats"
+            ]
+        },
+        "format": "netcdf",
+        "note": "Test2"
+    }
+]

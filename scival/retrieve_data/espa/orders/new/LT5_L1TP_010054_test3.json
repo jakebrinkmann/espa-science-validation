@@ -1,0 +1,27 @@
+[
+    {
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_010054_20110312_20161209_01_T1"
+            ],
+            "products": [
+                "l1",
+                "bt",
+                "st"
+            ]
+        },
+        "format": "envi",
+        "note": "Test3",
+        "resize": {
+            "pixel_size": 500,
+            "pixel_size_units": "meters"
+        },
+        "projection": {
+            "utm": {
+                "zone": 18,
+                "zone_ns": "north"
+            }
+        },
+        "resampling_method": "nn"
+    }
+]

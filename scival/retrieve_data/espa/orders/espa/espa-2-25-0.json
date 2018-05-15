@@ -1,0 +1,249 @@
+[
+    {
+        "note": "espa-2-25-0",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_080010_20170712_20170726_01_T1"
+            ],
+            "products": [
+                "st",
+                "stats"
+            ]
+        },
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_079010_20170713_20170809_01_T1"
+            ],
+            "products": [
+                "st",
+                "stats"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_080010_20110626_20160831_01_T1"
+            ],
+            "products": [
+                "st",
+                "stats"
+            ]
+        },
+        "myd11a1": {
+            "inputs": [
+                "MYD11A1.A2017306.h12v01.006.2017307165146"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "plot_statistics": true,
+        "format": "envi",
+        "projection": {
+            "utm": {
+                "zone": 4,
+                "zone_ns": "north"
+            }
+        },
+        "image_extents": {
+            "north": 71.3,
+            "south": 71.2,
+            "east": -156.6,
+            "west": -156.7,
+            "units": "dd"
+        }
+    },
+    {
+        "note": "espa-2-25-0",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_080010_20170712_20170726_01_T1"
+            ],
+            "products": [
+                "swe"
+            ]
+        },
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_079010_20170713_20170809_01_T1"
+            ],
+            "products": [
+                "swe"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_080010_20110626_20160831_01_T1"
+            ],
+            "products": [
+                "swe"
+            ]
+        },
+        "format": "netcdf"
+    },
+    {
+        "note": "espa-2-25-0",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_080010_20170712_20170726_01_T1"
+            ],
+            "products": [
+                "stats",
+                "toa"
+            ]
+        },
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_079010_20170713_20170809_01_T1"
+            ],
+            "products": [
+                "stats",
+                "toa"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_080010_20110626_20160831_01_T1"
+            ],
+            "products": [
+                "stats",
+                "toa"
+            ]
+        },
+        "plot_statistics": true,
+        "format": "gtiff"
+    },
+    {
+        "note": "espa-2-25-0",
+        "tm4_collection": {
+            "inputs": [
+                "LT04_L1TP_030031_19890420_20161002_01_T1"
+            ],
+            "products": [
+                "toa"
+            ]
+        },
+        "format": "envi",
+        "resize": {
+            "pixel_size": 500,
+            "pixel_size_units": "meters"
+        },
+        "projection": {
+            "utm": {
+                "zone": 14,
+                "zone_ns": "north"
+            }
+        },
+        "image_extents": {
+            "north": 4653099.046333,
+            "south": 4603245.749171,
+            "east": 537599.784776,
+            "west": 443877.992818,
+            "units": "meters"
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "note": "espa-2-25-0 - ERROR",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1GT_054014_20141018_20170303_01_T2"
+            ],
+            "products": [
+                "sr_ndvi"
+            ]
+        },
+        "projection": {
+            "utm": {
+                "zone_ns": "north",
+                "zone": 25
+            }
+        },
+        "plot_statistics": false,
+        "format": "gtiff"
+    },
+    {
+        "note": "espa-2-25-0 - INVALID",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1GT_054014_20141018_20170303_01_T2"
+            ],
+            "products": [
+                "sr_ndvi"
+            ]
+        },
+        "projection": {
+            "utm": {
+                "zone_ns": "north",
+                "zone": 25
+            }
+        },
+        "plot_statistics": false,
+        "format": "gtiff",
+        "image_extents": {
+            "west": -168.3,
+            "east": -168.2,
+            "north": -30.3,
+            "south": -30.6,
+            "units": "dd"
+        }
+    },
+    {
+        "note": "espa-2-25-0 - ERROR",
+        "image_extents": {
+            "units": "dd",
+            "west": -104.050254,
+            "east": -103.294537,
+            "north": 44.485869,
+            "south": 43.954773
+        },
+        "projection": {
+            "ps": {
+                "false_easting": 0,
+                "longitudinal_pole": 0,
+                "false_northing": 0,
+                "latitude_true_scale": -70
+            }
+        },
+        "format": "gtiff",
+        "resampling_method": "nn",
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_033029_20140727_20170304_01_T1"
+            ],
+            "products": [
+                "l1",
+                "sr_ndvi",
+                "sr_evi",
+                "stats"
+            ]
+        },
+        "mod13q1": {
+            "inputs": [
+                "MOD13Q1.A2014209.h10v04.005.2014226035957"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "resize": {
+            "pixel_size_units": "dd",
+            "pixel_size": 0.0025
+        }
+    },
+    {
+        "format": "gtiff",
+        "resampling_method": "nn",
+        "note": "espa-2-25-0",
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_016038_20111109_20160912_01_T1"
+            ],
+            "products": [
+                "source_metadata",
+                "st"
+            ]
+        }
+    }
+]
