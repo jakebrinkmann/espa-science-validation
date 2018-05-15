@@ -2,12 +2,13 @@
 
 import sys
 import os
-import logging
 import tarfile
 import time
 import fnmatch
 import shutil
 import itertools
+
+from scival import logger
 
 
 class Extract:
@@ -35,22 +36,22 @@ class Extract:
 
                 tar_test = tarfile.open(test, 'r:gz')
 
-                logging.info("{0} is {1} MB...\n".format(mast, os.path.getsize(mast) * 0.000001))
+                logger.info("{0} is {1} MB...\n".format(mast, os.path.getsize(mast) * 0.000001))
 
-                logging.info("{0} is {1} MB...\n".format(test, os.path.getsize(test) * 0.000001))
+                logger.info("{0} is {1} MB...\n".format(test, os.path.getsize(test) * 0.000001))
 
                 if os.path.getsize(mast) == 0:
-                    logging.critical("Archive {0} is of zero size!".format(mast))
+                    logger.critical("Archive {0} is of zero size!".format(mast))
 
                     sys.exit(1)
 
                 elif os.path.getsize(test) == 0:
-                    logging.critical("Archive {0} is of zero size!".format(test))
+                    logger.critical("Archive {0} is of zero size!".format(test))
 
                     sys.exit(1)
 
             except:
-                logging.critical("Problem with .tar.gz file(s): {0} and {1}.".format(mast, test))
+                logger.critical("Problem with .tar.gz file(s): {0} and {1}.".format(mast, test))
 
                 sys.exit(1)
 
@@ -60,7 +61,7 @@ class Extract:
                 tar_test.extractall(path=os.path.dirname(test))
 
             except:
-                logging.critical("Problem extracting contents from .tar.gz. file:"
+                logger.critical("Problem extracting contents from .tar.gz. file:"
                                  "{0} and {1}.".format(mast, test))
 
         return None
@@ -82,9 +83,9 @@ class Find:
                 out_files.append(os.path.join(root, filename))
 
         if len(out_files) == 0:
-            logging.critical("No files found in dir {0}".format(target_dir))
+            logger.critical("No files found in dir {0}".format(target_dir))
 
-        return out_files
+        return sorted(out_files)
 
     @staticmethod
     def get_ext(*args):
@@ -98,8 +99,8 @@ class Find:
         for i in args:
             exts += [os.path.splitext(j)[1] for j in i if '.gz' not in j]
 
-        logging.info("All extensions: {0}".format(exts))
-        logging.info("Unique extensions: {0}".format(list(set(exts))))
+        logger.info("All extensions: {0}".format(exts))
+        logger.info("Unique extensions: {0}".format(list(set(exts))))
 
         return list(set(exts))
 
@@ -130,7 +131,7 @@ class Find:
 
             d_r = raster.RasterCount
 
-            logging.info("Number of bands in {0}: {1}".format(r_name, d_r))
+            logger.info("Number of bands in {0}: {1}".format(r_name, d_r))
 
             return d_r
 
@@ -148,7 +149,7 @@ class Find:
 
             d_r = len(raster.GetSubDatasets())
 
-            logging.info("Number of SDS in {0}: {1}".format(r_name, d_r))
+            logger.info("Number of SDS in {0}: {1}".format(r_name, d_r))
 
             return d_r
 
@@ -167,17 +168,17 @@ class Find:
             d_range_mast = 1
 
         if d_range_test == 1:
-            logging.info("File {0} is a singleband raster.".format(fn_test))
+            logger.info("File {0} is a singleband raster.".format(fn_test))
         else:
-            logging.info("File {0} is a multiband raster.".format(fn_test))
+            logger.info("File {0} is a multiband raster.".format(fn_test))
 
         if d_range_mast == 1:
-            logging.info("File {0} is a singleband raster.".format(fn_mast))
+            logger.info("File {0} is a singleband raster.".format(fn_mast))
         else:
-            logging.info("File {0} is a multiband raster.".format(fn_mast))
+            logger.info("File {0} is a multiband raster.".format(fn_mast))
 
         if int(d_range_test) != int(d_range_mast):
-            logging.critical("Number of sub-bands inside raster do not match. "
+            logger.critical("Number of sub-bands inside raster do not match. "
                              "Test: {0} | Master: {1}.".
                              format(d_range_test, d_range_mast))
             d_range = None
@@ -230,7 +231,7 @@ class ImWrite:
         plt.savefig(im_out, dpi=250)
         plt.close()
 
-        logging.warning("{0} raster written to {1}.".format(fn_type, im_out))
+        logger.warning("{0} raster written to {1}.".format(fn_type, im_out))
 
     @staticmethod
     def plot_hist(test, mast, diff_raster, fn_out, fn_type, dir_out,
@@ -283,7 +284,7 @@ class ImWrite:
         try:
             plt.hist(diff_valid, bins)
         except AttributeError:
-            logging.warning("Difference values from diff_valid variable could"
+            logger.warning("Difference values from diff_valid variable could"
                             " not be plotted.")
             return
 
@@ -317,7 +318,7 @@ class ImWrite:
 
         plt.close()
 
-        logging.warning("Difference histogram written to {0}.".format(im_out))
+        logger.warning("Difference histogram written to {0}.".format(im_out))
 
 
 class Cleanup:
@@ -352,7 +353,7 @@ class Cleanup:
                                    .difference(set(rm_fn(m_names)))))
 
             if len(fn_diffs) > 0:
-                logging.warning("Files to be removed: {0}".format(fn_diffs))
+                logger.warning("Files to be removed: {0}".format(fn_diffs))
 
             if len(fn_diffs) == 0:
                 return t_names
@@ -367,9 +368,9 @@ class Cleanup:
                 else:
                     rm.append(True)
 
-            logging.debug("remove boolean: {0}".format(rm))
-            logging.debug("test_fn: {0}".format(test_fn))
-            logging.debug("final list: {0}".format(list(
+            logger.debug("remove boolean: {0}".format(rm))
+            logger.debug("test_fn: {0}".format(test_fn))
+            logger.debug("final list: {0}".format(list(
                 itertools.compress(t_names, rm))))
 
             return list(itertools.compress(t_names, rm))
@@ -409,7 +410,7 @@ class Cleanup:
                 except:
                     continue
 
-        logging.warning("Cleaned up all data files.")
+        logger.warning("Cleaned up all data files.")
 
         # Clean up gap mask files
         gm = [os.path.join(dirpath, f)
@@ -424,7 +425,7 @@ class Cleanup:
 
         [shutil.rmtree(i, ignore_errors=True) for i in st]
 
-        logging.warning("Removed all non-archive files.")
+        logger.warning("Removed all non-archive files.")
 
         return None
 
@@ -437,7 +438,7 @@ class Cleanup:
             ext <str>: file extension to be removed"""
         out_files = [i for i in envi_files if ext not in i]
 
-        logging.info("Skipping analysis of {0} file {1}".
+        logger.info("Skipping analysis of {0} file {1}".
                      format(ext, [i for i in envi_files if ext in i]))
 
         return out_files

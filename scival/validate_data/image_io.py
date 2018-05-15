@@ -2,13 +2,14 @@
 
 Purpose: contains functions to read image data and extract metadata.
 """
-import logging
 
 import numpy as np
 try:
     from osgeo import gdal
 except ImportError:
     import gdal
+
+from scival import logger
 
 
 class RasterIO:
@@ -51,23 +52,23 @@ class RasterIO:
         """
         # get nodata value
         r_a = rast.GetRasterBand(n_bands)
+        r_nd = False
         try:
             r_nd = r_a.GetNoDataValue()
         except AttributeError:
-            logging.warning("Variable {0} does not have NoData value.".
+            logger.warning("Variable {0} does not have NoData value.".
                             format(r_a))
-            r_nd = None
 
         # read raster as array
         rast_arr = np.array(r_a.ReadAsArray())
 
         # mask nodata value, if it exists
-        if r_nd:
+        if r_nd != False:
             rast_arr = np.ma.masked_where(rast_arr == r_nd, rast_arr)
-            logging.info("NoData value: {0}".format(r_nd))
+            logger.info("NoData value: {0}".format(r_nd))
         else:
             rast_arr = r_a
-            logging.info("NoData value could not be determined.")
+            logger.info("NoData value could not be determined.")
 
         return (rast_arr,r_nd)
 
@@ -104,12 +105,12 @@ class RasterCmp:
         proj_diff = (tst_proj == mst_proj)
 
         if proj_diff:
-            logging.info("Projections match.")
+            logger.info("Projections match.")
             status = True
         else:
-            logging.error("Projections do not match.")
-            logging.error("Test transform: {0}".format(tst_proj))
-            logging.error("Master transform: {0}".format(mst_proj))
+            logger.error("Projections do not match.")
+            logger.error("Test transform: {0}".format(tst_proj))
+            logger.error("Master transform: {0}".format(mst_proj))
             status = False
 
         return status
@@ -126,12 +127,12 @@ class RasterCmp:
         mst_gt = mast.GetGeoTransform()
         gt_diff = (tst_gt == mst_gt)
         if gt_diff:
-            logging.info("Geo transforms match.")
+            logger.info("Geo transforms match.")
             status = True
         else:
-            logging.error("Geo transforms match.")
-            logging.error("Test transform: {0}".format(tst_gt))
-            logging.error("Master transform: {0}".format(mst_gt))
+            logger.error("Geo transforms match.")
+            logger.error("Test transform: {0}".format(tst_gt))
+            logger.error("Master transform: {0}".format(mst_gt))
             status = False
 
         return status
@@ -146,12 +147,12 @@ class RasterCmp:
         """
         cols_diff = test.RasterXSize - mast.RasterXSize
         if cols_diff == 0:
-            logging.info("Columns match.")
+            logger.info("Columns match.")
             status = True
         else:
-            logging.error("Columns do not match.")
-            logging.error("Test col: {0}".format(test.RasterXSize))
-            logging.error("Master col: {0}".format(mast.RasterXSize))
+            logger.error("Columns do not match.")
+            logger.error("Test col: {0}".format(test.RasterXSize))
+            logger.error("Master col: {0}".format(mast.RasterXSize))
             status = False
 
         return status
@@ -166,12 +167,12 @@ class RasterCmp:
         """
         rows_diff = test.RasterYSize - mast.RasterYSize
         if rows_diff == 0:
-            logging.info("Rows match.")
+            logger.info("Rows match.")
             status = True
         else:
-            logging.error("Rows do not match.")
-            logging.error("Test row: {0}".format(test.RasterYSize))
-            logging.error("Master row: {0}".format(mast.RasterYSize))
+            logger.error("Rows do not match.")
+            logger.error("Test row: {0}".format(test.RasterYSize))
+            logger.error("Master row: {0}".format(mast.RasterYSize))
             status = False
 
         return status

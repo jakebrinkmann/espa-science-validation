@@ -38,12 +38,12 @@ daniel.zelenak.ctr@usgs.gov
 
 import sys
 import os
-import logging
 import time
 
 from scival.validate_data.file_io import Extract, Find, Cleanup
 from scival.validate_data.qa_images import GeoImage
 from scival.validate_data.qa_metadata import MetadataQA
+from scival import logger
 
 
 # TODO (med): Enable SDS sorting with NetCDF, HDF files.
@@ -94,7 +94,7 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
     mast_dirs = sorted([r for r, d, f in os.walk(dir_mast) if not d])
 
     if len(test_dirs) != len(mast_dirs):
-        logging.critical("Directory structure of Master differs from Test.")
+        logger.critical("Directory structure of Master differs from Test., MASTER: %s, TEST: %s", mast_dirs, test_dirs)
 
         sys.exit(1)
 
@@ -108,17 +108,17 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
         exts = Find.get_ext(all_test, all_mast)
 
         for ext in exts:
-            logging.info("Finding {0} files...".format(ext))
+            logger.info("Finding {0} files...".format(ext))
 
             test_f = Find.find_files(test_dirs[i], ext)
 
             mast_f = Find.find_files(mast_dirs[i], ext)
 
-            logging.info("Performing QA on {0} files located in {1}".format(ext, dir_test))
+            logger.info("Performing QA on {0} files located in {1}".format(ext, dir_test))
 
-            logging.info("Test files: {0}".format(test_f))
+            logger.info("Test files: {0}".format(test_f))
 
-            logging.info("Mast files: {0}".format(mast_f))
+            logger.info("Mast files: {0}".format(mast_f))
 
             # remove any _hdf.img files found with .img files
             if ext == ".img":
@@ -165,8 +165,8 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
 
     h, m = divmod(m, 60)
 
-    logging.warning("Total runtime: {0}h, {1}m, {2}s.".format(h, round(m, 3), round(s, 3)))
+    logger.warning("Total runtime: {0}h, {1}m, {2}s.".format(h, round(m, 3), round(s, 3)))
 
-    print("Done.")
+    logger.warning("Done.")
 
     return None
