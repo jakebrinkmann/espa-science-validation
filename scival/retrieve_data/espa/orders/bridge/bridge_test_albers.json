@@ -1,0 +1,88 @@
+[
+    {
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_015035_20140713_20170304_01_T1",
+                "LC08_L1TP_022032_20130828_20170309_01_T1",
+                "LC08_L1TP_032032_20160522_20170223_01_T1",
+                "LC08_L1TP_035038_20130331_20170313_01_T1",
+                "LC08_L1TP_047027_20131014_20170308_01_T1",
+                "LC08_L1GT_066017_20130917_20170308_01_T2"
+            ],
+            "products": [
+                "sr",
+                "st",
+                "swe",
+                "toa",
+                "bt"
+            ]
+        },
+        "format": "gtiff",
+        "note": "btest",
+        "projection": {
+            "aea": {
+                "central_meridian": -96,
+                "datum": "wgs84",
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_of_origin": 23,
+                "standard_parallel_1": 29.5,
+                "standard_parallel_2": 45.5
+            }
+        }
+    },
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_022033_20140228_20160905_01_T1"
+            ],
+            "products": [
+                "sr",
+                "st",
+                "swe",
+                "toa",
+                "bt"
+            ]
+        },
+        "format": "gtiff",
+        "note": "btest",
+        "projection": {
+            "aea": {
+                "central_meridian": -96,
+                "datum": "wgs84",
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_of_origin": 23,
+                "standard_parallel_1": 29.5,
+                "standard_parallel_2": 45.5
+            }
+        }
+    },
+    {
+        "tm4_collection": {
+            "inputs": [
+                "LT04_L1TP_035027_19890712_20161001_01_T1"
+            ],
+            "products": [
+                "sr",
+                "st",
+                "swe",
+                "toa",
+                "bt"
+            ]
+        },
+        "format": "gtiff",
+        "note": "btest",
+        "projection": {
+            "aea": {
+                "central_meridian": -96,
+                "datum": "wgs84",
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_of_origin": 23,
+                "standard_parallel_1": 29.5,
+                "standard_parallel_2": 45.5
+            }
+        }
+    }
+]

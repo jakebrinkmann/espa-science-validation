@@ -1,0 +1,26 @@
+[
+    {
+        "etm7_collection": {
+            "inputs": [
+                "LE07_L1TP_039037_20080712_20160922_01_T1"
+            ],
+            "products": [
+                "l1",
+                "bt"
+            ]
+        },
+        "format": "envi",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 500,
+            "pixel_size_units": "meters"
+        },
+        "projection": {
+            "utm": {
+                "zone": 11,
+                "zone_ns": "north"
+            }
+        },
+        "resampling_method": "nn"
+    }
+]

@@ -1,0 +1,170 @@
+[
+    {
+        "myd13q1": {
+            "inputs": [
+                "MYD13Q1.A2002185.h19v05.006.2015149070403"
+            ],
+            "products": [
+                "l1"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_182034_20020628_20161207_01_T1"
+            ],
+            "products": [
+                "l1",
+                "sr_ndvi",
+                "sr_evi"
+            ]
+        },
+        "format": "envi",
+        "note": "Test1",
+        "resize": {
+            "pixel_size": 250,
+            "pixel_size_units": "meters"
+        },
+        "image_extents": {
+            "west": 188945.952,
+            "north": 4260854.77,
+            "east": 344521.263,
+            "south": 4149729.547,
+            "units": "meters"
+        },
+        "projection": {
+            "utm": {
+                "zone": 35,
+                "zone_ns": "north"
+            }
+        },
+        "resampling_method": "bil"
+    },
+    {
+        "myd13q1": {
+            "inputs": [
+                "MYD13Q1.A2002185.h19v05.006.2015149070403"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_182034_20020628_20161207_01_T1"
+            ],
+            "products": [
+                "l1",
+                "swe",
+                "sr_ndvi",
+                "stats"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test2",
+        "resize": {
+            "pixel_size": 250,
+            "pixel_size_units": "meters"
+        },
+        "image_extents": {
+            "west": 1190082.308,
+            "north": 1019317.137,
+            "east": 1335074.265,
+            "south": 907662.747,
+            "units": "meters"
+        },
+        "projection": {
+            "aea": {
+                "central_meridian": 10,
+                "datum": "nad27",
+                "false_easting": 0,
+                "false_northing": 0,
+                "latitude_of_origin": 30,
+                "standard_parallel_1": 43,
+                "standard_parallel_2": 62
+            }
+        },
+        "resampling_method": "cc"
+    },
+    {
+        "myd13q1": {
+            "inputs": [
+                "MYD13Q1.A2002185.h19v05.006.2015149070403"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_182034_20020628_20161207_01_T1"
+            ],
+            "products": [
+                "l1",
+                "st",
+                "sr_ndvi",
+                "stats"
+            ]
+        },
+        "format": "envi",
+        "note": "Test3",
+        "resize": {
+            "pixel_size": 100,
+            "pixel_size_units": "meters"
+        },
+        "image_extents": {
+            "west": 2048288.867,
+            "north": 4254354.005,
+            "east": 2217357.955,
+            "south": 4095074.52,
+            "units": "meters"
+        },
+        "projection": {
+            "sinu": {
+                "central_meridian": 0,
+                "false_easting": 0,
+                "false_northing": 0
+            }
+        },
+        "resampling_method": "nn"
+    },
+    {
+        "myd13q1": {
+            "inputs": [
+                "MYD13Q1.A2002185.h19v05.006.2015149070403"
+            ],
+            "products": [
+                "l1",
+                "stats"
+            ]
+        },
+        "tm5_collection": {
+            "inputs": [
+                "LT05_L1TP_182034_20020628_20161207_01_T1"
+            ],
+            "products": [
+                "l1",
+                "sr_ndvi",
+                "stats"
+            ]
+        },
+        "format": "gtiff",
+        "note": "Test4",
+        "resize": {
+            "pixel_size": 0.005,
+            "pixel_size_units": "dd"
+        },
+        "image_extents": {
+            "west": 23.495342,
+            "north": 38.425612,
+            "east": 25.011058,
+            "south": 37.02173,
+            "units": "dd"
+        },
+        "projection": {
+            "lonlat": null
+        },
+        "resampling_method": "nn"
+    }
+]

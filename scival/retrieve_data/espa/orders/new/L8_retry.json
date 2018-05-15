@@ -1,0 +1,16 @@
+[
+    {
+        "olitirs8_collection": {
+            "inputs": [
+                "LC08_L1TP_047027_20131014_20170308_01_T1"
+            ],
+            "products": [
+                "sr",
+                "toa",
+                "sr_ndvi"
+            ]
+        },
+        "format": "envi",
+        "note": "Test1"
+    }
+]

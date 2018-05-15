@@ -5,10 +5,12 @@
 import os
 import sys
 import json
+import glob
 
 import requests
 
-from scival.retrieve_data.espa import order_specs, api_config, espa_orders_api
+from scival.retrieve_data.espa import api_config, espa_orders_api
+from scival import logger, __location__
 
 
 def order_text(outdir: str) -> str:
@@ -27,23 +29,27 @@ def order_text(outdir: str) -> str:
     return outdir + os.sep + "order_{}_.txt".format(api_config.timestamp())
 
 
-def load_order(order_key: str) -> dict:
+def load_order(order_key: str='original.test1') -> dict:
     """
     Load in a pre-constructed order by default if None is specified.  Otherwise, load the order from a .yaml file
     :param order_key: A string containing the order key, otherwise "original" will be used
     :return:
     """
-    if order_key is None:
-        return order_specs.orders["original"]
+    if len(order_key.split('.')) == 1:
+        order_key += '.*'
 
-    else:
-        try:
-            return order_specs.orders[order_key]
+    file_search = os.path.abspath(os.path.join(__location__, 'retrieve_data/espa/orders/{0}/{1}.json'
+                                               .format(*order_key.split('.'))))
+    files = glob.glob(file_search)
+    if not len(files):
+        raise IOError('File does not exist: {}'.format(file_search))
 
-        except KeyError:
-            print("The given key: {} does not exist in the order_specs.py file.".format(order_key))
+    try:
+        return json.load(open(files[0]))
 
-            sys.exit(1)
+    except Exception as exc:
+        logger.error("Problem reading file: {}".format(files[0]))
+        raise
 
 
 def place_order(espa_env: str, username: str, ssl_ver: bool=True, outdir: str=None, order: str=None):
@@ -71,7 +77,7 @@ def place_order(espa_env: str, username: str, ssl_ver: bool=True, outdir: str=No
     for order in orders:
         counter += 1
 
-        print("Requesting order {} of {}".format(counter, order_length))
+        logger.info("Requesting order {} of {}".format(counter, order_length))
 
         r = requests.post(espa_url + api_config.api_urls["order"],
                           auth=(username, passwd),
