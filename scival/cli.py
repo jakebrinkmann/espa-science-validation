@@ -53,3 +53,11 @@ def order(username, espa_env, dir_out, order):
 @click.option('-e', '--espa_env', required=True, type=click.Choice(espa_orders_api.api_config.espa_env.keys()), help='ESPA environment', envvar='ESPA_SCIVAL_ESPA_ENV')
 def download(txt_in, outdir, username, espa_env):
     espa_orders_api.get_orders(txt_in, outdir, username, espa_env)
+
+
+@espa.command('cancel', help='Cancel orders not yet processed')
+@click.option('-i', '--txt_in', required=True, type=str, help='The .txt file containing the ESPA orders to be removed')
+@click.option('-u', '--username', required=True, type=str, help='ESPA user name', envvar='ESPA_SCIVAL_ESPA_USERNAME')
+@click.option('-e', '--espa_env', required=True, type=click.Choice(espa_orders_api.api_config.espa_env.keys()), help='ESPA environment', envvar='ESPA_SCIVAL_ESPA_ENV')
+def cancel(txt_in, username, espa_env):
+    espa_orders_api.cancel_orders(txt_in, username, espa_env)

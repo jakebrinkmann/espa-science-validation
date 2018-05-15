@@ -247,3 +247,31 @@ def get_orders(txt_in: str, outdir: str, username: str, espa_env: str):
     print("Processing time: {}".format(t1 - t0))
 
     return None
+
+
+def cancel_orders(txt_in: str, username: str, espa_env: str):
+    """
+
+    :param txt_in: The full path and filename of the input txt file containing the ESPA orders
+    :param username: ESPA user name
+    :param espa_env: ESPA environment
+    :return:
+    """
+
+    order_list = json.loads(open(txt_in, "r").read())
+
+    t0 = get_time()
+    espa_url = get_espa_env(espa_env)
+    passwd = espa_login()
+
+    for order in order_list:
+        url = espa_url + api_config.api_urls["order"] + order["orderid"]
+        logger.warning('Cancelling order: %s', url)
+        cancellation = {'orderid': order['orderid'], 'status': 'cancelled'}
+        result = requests.put(url, auth=(username, passwd), json=cancellation).json()
+        logger.info('Result: %s', result)
+
+    logger.warning('Removing cancelled file: %s', txt_in)
+    os.unlink(txt_in)
+
+    logger.info("Processing time: {}".format(get_time() - t0))
