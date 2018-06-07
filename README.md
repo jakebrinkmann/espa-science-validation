@@ -54,5 +54,10 @@ Example usage and logical order:
 
 1) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
 
+Instead of ESPA, some data can be retrieved immedately from EarthExplorer
+(with Machine-to-Machine download):
+
+1) `scival ee download -u <USERNAME> -e <EE_ENVIRONMENT> -o <OUTPUT_DIRECTORY>/ --search ard_1`
+
 
 [1]: https://ers.cr.usgs.gov/
