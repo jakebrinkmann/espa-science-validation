@@ -52,7 +52,7 @@ Example usage and logical order:
 
 1) `scival espa download -u <USERNAME> -e <ESPA_ENVIRONMENT> -o <OUTPUT_DIRECTORY>/ -i order_123456789.txt`
 
-1) `scival qa compare -m MASTER/ -t TEST/ -o RESULTS/ --verbose --include-nodata`
+1) `scival -vv qa compare -m MASTER/ -t TEST/ -o RESULTS/ --archive --include-nodata`
 
 Instead of ESPA, some data can be retrieved immedately from EarthExplorer
 (with Machine-to-Machine download):
