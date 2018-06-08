@@ -48,9 +48,9 @@ def espa():
 @click.option('-e', '--ee_env', required=True,
               type=click.Choice(espa_orders_api.api_config.espa_env.keys()),
               help='EE environment', envvar='ESPA_SCIVAL_EE_ENV')
-def download(outdir, search, username, ee_env):
+def download(dir_out, search, username, ee_env):
     """Download a specific JSON search."""
-    ee_m2m_api.download_search(search, outdir, username, ee_env)
+    ee_m2m_api.download_search(search, dir_out, username, ee_env)
 
 
 @cli.group('espa')
