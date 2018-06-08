@@ -81,12 +81,12 @@ def qa_data(dir_mast: str, dir_test: str, dir_out: str, archive: bool = True, xm
             os.makedirs(dir_out)
 
         # read in .tar.gz files
-        test_files = Find.find_files(dir_test, ".gz")
+        test_files = Find.find_files(dir_test, ".tar*")
 
-        mast_files = Find.find_files(dir_mast, ".gz")
+        mast_files = Find.find_files(dir_mast, ".tar*")
 
         # Extract files from archive
-        Extract.unzip_gz_files(test_files, mast_files)
+        Extract.unzip_files(test_files, mast_files)
 
     # find only the deepest dirs
     test_dirs = sorted([r for r, d, f in os.walk(dir_test) if not d])

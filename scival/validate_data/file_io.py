@@ -13,11 +13,11 @@ from scival import logger
 
 class Extract:
     @staticmethod
-    def unzip_gz_files(tests: list, masts: list) -> None:
+    def unzip_files(tests: list, masts: list) -> None:
         """
         Extract files from archives in sorted order
-        :param tests: List of paths to the test .gz archives
-        :param masts: List of paths to the master .gz archives
+        :param tests: List of paths to the test .tar archives
+        :param masts: List of paths to the master .tar archives
         :return:
         """
         print('Warning: decompressing files. Make sure you have the necessary '
@@ -32,9 +32,9 @@ class Extract:
 
         for mast, test in zip(masts, tests):
             try:
-                tar_mast = tarfile.open(mast, 'r:gz')
-
-                tar_test = tarfile.open(test, 'r:gz')
+                mode = 'r:gz' if mast.endswith('gz') else 'r'
+                tar_mast = tarfile.open(mast, mode)
+                tar_test = tarfile.open(test, mode)
 
                 logger.info("{0} is {1} MB...\n".format(mast, os.path.getsize(mast) * 0.000001))
 
@@ -50,9 +50,9 @@ class Extract:
 
                     sys.exit(1)
 
-            except:
-                logger.critical("Problem with .tar.gz file(s): {0} and {1}.".format(mast, test))
-
+            except Exception as exc:
+                logger.critical("Problem with archive file(s): %s and %s. %s",
+                                mast, test, str(exc))
                 sys.exit(1)
 
             try:
@@ -60,9 +60,9 @@ class Extract:
 
                 tar_test.extractall(path=os.path.dirname(test))
 
-            except:
-                logger.critical("Problem extracting contents from .tar.gz. file:"
-                                 "{0} and {1}.".format(mast, test))
+            except Exception as exc:
+                logger.critical("Problem extracting contents from archive files:"
+                                 "%s and %s. %s", mast, test, str(exc))
 
         return None
 
@@ -89,7 +89,7 @@ class Find:
 
     @staticmethod
     def get_ext(*args):
-        """Get unique extensions for all extracted files. Ignore .gz files.
+        """Get unique extensions for all extracted files. Ignore .tar files.
 
         Args:
             *args <str>: string(s) of file extensions
@@ -97,7 +97,7 @@ class Find:
 
         exts = []
         for i in args:
-            exts += [os.path.splitext(j)[1] for j in i if '.gz' not in j]
+            exts += [os.path.splitext(j)[1] for j in i if '.tar' not in j]
 
         logger.info("All extensions: {0}".format(exts))
         logger.info("Unique extensions: {0}".format(list(set(exts))))
@@ -400,7 +400,7 @@ class Cleanup:
                      for f in fnmatch.filter(files, '*')]
 
         for f in all_files:
-            if f.endswith(".tar.gz"):
+            if any(f.endswith(x) for x in (".tar.gz", '.tar')):
                 continue
 
             else:
