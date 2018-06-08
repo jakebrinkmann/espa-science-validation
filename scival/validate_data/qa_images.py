@@ -18,7 +18,7 @@ def do_diff(test, mast, nodata=False):
         mast <numpy.ndarray>: array of master raster
     """
     # If a NoData value is present, or the "--include-nodata" flag was used:
-    if nodata != False:
+    if nodata is not False:
         test = np.ma.masked_where(test == nodata, test)
         mast = np.ma.masked_where(mast == nodata, mast)
 

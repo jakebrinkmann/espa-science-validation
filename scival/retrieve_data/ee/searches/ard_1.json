@@ -1,0 +1,33 @@
+{
+    "datasetName": "ARD_TILE",
+    "sortOrder": "ASC",
+    "startingNumber": 1,
+    "maxResults": 1,
+    "additionalCriteria": {
+	    "filterType": "and",
+	    "childFilters": [
+		    {
+		            //"name": "Tile Grid Region",
+		            "filterType": "value",
+		            "fieldId": 21789,
+		            "value": "CU"
+		    },
+		    {
+		            //"name": "Tile Grid Horizontal",
+		            "filterType": "value",
+		            "fieldId": 21787,
+		            "value": 16
+		    },
+		    {
+		            //"name": "Tile Grid Vertical",
+		            "filterType": "value",
+		            "fieldId": 21788,
+		            "value": 6
+		    }
+	    ]
+    },
+    "temporalFilter": {
+	"startDate": "2017-10-19",
+    	"endDate": "2017-10-19"
+    }
+}

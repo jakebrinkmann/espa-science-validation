@@ -4,6 +4,7 @@ import click
 
 from scival.util import setup_logger
 from scival.retrieve_data.espa import espa_orders_api
+from scival.retrieve_data.ee import ee_m2m_api
 from scival.retrieve_data.espa import order_scenes_c1
 from scival.validate_data.qa import qa_data
 
@@ -29,6 +30,27 @@ def qa():
 @click.option('--include-nodata', default=False, is_flag=True, help='Do not mask NoData values')
 def scival(dir_mast, dir_test, dir_out, xml_schema, archive, include_nodata):
     qa_data(dir_mast, dir_test, dir_out, archive, xml_schema, include_nodata)
+
+
+@cli.group('ee')
+def espa():
+    """Search and Download from an EE system."""
+    pass
+
+
+@espa.command('download', help='Download already processed data')
+@click.option('-o', '--dir_out', required=True, type=str,
+              help='The output directory')
+@click.option('--search', required=True, type=str,
+              help='Keyword look up the appropriate search')
+@click.option('-u', '--username', required=True, type=str,
+              help='EE user name', envvar='ESPA_SCIVAL_EE_USERNAME')
+@click.option('-e', '--ee_env', required=True,
+              type=click.Choice(espa_orders_api.api_config.espa_env.keys()),
+              help='EE environment', envvar='ESPA_SCIVAL_EE_ENV')
+def download(dir_out, search, username, ee_env):
+    """Download a specific JSON search."""
+    ee_m2m_api.download_search(search, dir_out, username, ee_env)
 
 
 @cli.group('espa')
